@@ -26,12 +26,18 @@
             _valid = false;
         }
 
+        
+        /**
+         * Intended for returning an EpisodeInfo that is known to be bad, eg from a non-valid categoriser input
+         * might cause some problems if you do new EpisodeInfo(true) as the (bool)EpisodeInfo repends on the valid state
+         * which is set here
+         */
         public EpisodeInfo(bool valid)
         {
-            this.Name = "";
-            this.Season = 0;
-            this.Episode = 0;
-            this._valid = valid;
+            Name = "";
+            Season = 0;
+            Episode = 0;
+            _valid = valid;
         }
 
         public static implicit operator bool(EpisodeInfo f)
