@@ -55,9 +55,9 @@
       <Project>{32699635-7870-414d-8f4c-f068914642f8}</Project>
       <Name>BlueScreenIO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\BlueScreenUtils\BlueScreenUtils.csproj">
       <Project>{a9cd5cc5-921c-4a9a-bb34-2ee1e7aa1fd7}</Project>
-      <Name>Utils</Name>
+      <Name>BlueScreenUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
