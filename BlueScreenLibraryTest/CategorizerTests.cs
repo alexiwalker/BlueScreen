@@ -10,28 +10,29 @@ namespace BlueScreenLibraryTest
     [TestFixture]
     public class CategorizerTests
     {
-        private const string DefaultShowname = "Arrow.S01E02.HTV.WTF";
-        private const string DefaultShownameWithSpace = "Arrow S01E02";
-        private const string DefaultShownameWithX = "Arrow.1x2";
+        private const string DefaultShowname = "Arrow.S01E02.HTV.WTF.mkv";
+        private const string DefaultShownameWithSpace = "Arrow S01E02.mkv";
+        private const string DefaultShownameWithX = "Arrow.1x2.mkv";
 
         private readonly List<Pair<string, EpisodeInfo>> _sourceExpectedList = new List<Pair<string, EpisodeInfo>>
         {
-            new Pair<string, EpisodeInfo>("Arrow.S01E02.HTV.WTF", new EpisodeInfo("Arrow", 1, 2)),
-            new Pair<string, EpisodeInfo>("Arrow S01E02", new EpisodeInfo("Arrow", 1, 2)),
-            new Pair<string, EpisodeInfo>("Arrow.1x2", new EpisodeInfo("Arrow", 1, 2)),
-            new Pair<string, EpisodeInfo>("Castle.2009.s08e13", new EpisodeInfo("Castle 2009", 8, 13)),
+            new Pair<string, EpisodeInfo>("Arrow.S01E02.HTV.WTF.mkv", new EpisodeInfo("Arrow", 1, 2)),
+            new Pair<string, EpisodeInfo>("Arrow S01E02.mkv", new EpisodeInfo("Arrow", 1, 2)),
+            new Pair<string, EpisodeInfo>("Arrow.1x2.mkv", new EpisodeInfo("Arrow", 1, 2)),
+            new Pair<string, EpisodeInfo>("Castle.2009.s08e13.mkv", new EpisodeInfo("Castle 2009", 8, 13)),
             new Pair<string, EpisodeInfo>(@"D:\Castle.Season.8\Ep-03.PhDead.mp4", new EpisodeInfo("Castle", 8, 3)),
             new Pair<string, EpisodeInfo>(@"D:\Castle.2009.Season.8\Ep-03.PhDead.mp4", new EpisodeInfo("Castle 2009", 8, 3)),
             new Pair<string, EpisodeInfo>(@"D:\Castle 2009 Season 8\Ep-03 PhDead.mp4", new EpisodeInfo("Castle 2009", 8, 3)),
+            new Pair<string, EpisodeInfo>(@"C:\Users\Alexa\Downloads\tors\Jack Ryan - Season 2 [1080p]\Jack Ryan - S02E06 - Persona Non Grata.mkv", new EpisodeInfo("Jack Ryan", 2, 6)),
         };
 
 
-        public static void CompareMembers(EpisodeInfo a, EpisodeInfo b)
+        private static void CompareMembers(EpisodeInfo a, EpisodeInfo b)
         {
             Assert.AreEqual(a.Name, b.Name);
-            Assert.AreEqual(a.Season, b.Season);
-            Assert.AreEqual(a.Episode, b.Episode);
-            Assert.AreEqual((bool) a, (bool) b);
+            Assert.True(a.Season == b.Season);
+            Assert.True(a.Episode == b.Episode);
+            Assert.True((bool) a == (bool) b);
         }
 
         [Test]

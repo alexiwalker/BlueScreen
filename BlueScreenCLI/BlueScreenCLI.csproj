@@ -35,6 +35,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +47,35 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlueScreenCategorizer\BlueScreenCategorizer.csproj">
+      <Project>{0ec22369-1cff-4dfb-8a76-2c300dd5a295}</Project>
+      <Name>BlueScreenCategorizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueScreenIO\BlueScreenIO.csproj">
+      <Project>{32699635-7870-414d-8f4c-f068914642f8}</Project>
+      <Name>BlueScreenIO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueScreenUtils\BlueScreenUtils.csproj">
+      <Project>{a9cd5cc5-921c-4a9a-bb34-2ee1e7aa1fd7}</Project>
+      <Name>BlueScreenUtils</Name>
+    </ProjectReference>
+<!--    <ProjectReference Include="..\BlueScreenStorage\BlueScreenStorage.csproj">-->
+<!--      <Project>{4eb21731-981a-48f8-8e85-b5325f855a8c}</Project>-->
+<!--      <Name>BlueScreenStorage</Name>-->
+<!--    </ProjectReference>-->
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
