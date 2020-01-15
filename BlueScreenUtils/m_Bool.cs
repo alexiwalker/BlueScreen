@@ -14,7 +14,7 @@ namespace Utils {
 			message = "";
 		}
 
-		public static implicit operator bool(m_Bool f) => f.status;
+		public static implicit operator bool(m_Bool o) => o.status;
 
 		public override string ToString() => message;
 

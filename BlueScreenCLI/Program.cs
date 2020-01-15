@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Actions;
 using BlueScreenCategoriser;
 using BlueScreenIO;
 using BlueScreenIO.IOInterface;
@@ -21,21 +22,9 @@ namespace BlueScreenCLI {
 				return;
 			}
 
-			var allFiles = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
-
-			foreach (var f in allFiles) {
-				var episodeInfo = FileCategorizer.GetFileInfo(f);
-
-				if (!episodeInfo) {
-					Console.WriteLine($"Unable to extract episode details from path provided, or invalid extension for: {f}");
-					continue;
-				}
-
-				var mBool = FileRelocation.RelocateFile(episodeInfo, destination, _storageType);
-
-				if (!mBool)
-					Console.WriteLine($"move not successful for: {f}. Error: {mBool} ");
-			}
+			var n = Library.BuildFromSource(source, destination).ToString();
+			
+			Console.WriteLine($"Moved {n} Files");
 		}
 	}
 }

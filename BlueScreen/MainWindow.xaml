@@ -7,13 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
-        
-        <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="ScrollViewContainer">
-            
-            <WrapPanel x:Name="Wrapper" Width="{Binding ElementName=ScrollViewContainer}"  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Margin="5,5,5,5" VerticalAlignment="Center"></WrapPanel>
-
-            
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition  Height="100"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" x:Name="ScrollViewContainer" VerticalAlignment="Stretch" >
+            <WrapPanel x:Name="Wrapper" Width="{Binding ElementName=ScrollViewContainer}"
+                       ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center"  Margin="5,5,5,5"
+                       VerticalAlignment="Stretch" />
         </ScrollViewer>
+
+        <!-- <Button Click="TestButtonClick" Width="250" Height="50"> Test Click </Button> -->
+        
+        <Button Grid.Row="1" x:Name="DrawerBack" HorizontalAlignment="Left" Height="20" Width="25" VerticalAlignment="Top" Margin="25,15,25,0"
+                Click="DrawerBack_OnClick">&lt;</Button>
+        
+        <ComboBox Grid.Row="1" x:Name="SeasonSelector" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top"
+                  SelectionChanged="SeasonSelector_OnSelectionChanged" Margin="100,15,25,0" Visibility="Hidden"></ComboBox>
+        
+        <WrapPanel Grid.Row="1" Height="85" x:Name="BottomDrawer" Width="{Binding ElementName=ScrollViewContainer}"
+                   ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Margin="5,5,5,5"
+                   VerticalAlignment="Center" Background="Aquamarine" />
+        
+
+
     </Grid>
 </Window>

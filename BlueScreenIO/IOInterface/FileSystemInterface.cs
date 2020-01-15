@@ -20,7 +20,7 @@ namespace BlueScreenIO.IOInterface {
 				return new m_Bool(false,e.Message);
 			}
 
-			return new m_Bool(true);
+			return new m_Bool(true,_path);
 		}
 
 		public m_Bool Remove() {

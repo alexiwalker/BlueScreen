@@ -21,8 +21,8 @@ namespace BlueScreenCategoriser {
 		};
 
 		//Classic showname patterns as regularly used by TPB and EZTV single episodes
-		private const string DefaultShowRegex = @"([A-Za-z\s.-]*?)[\s.-]+[sS]0([0-9]+)[\s.]*?[eE]0([0-9]+)";
-		private const string DefaultShowRegexFallBack = @"([a-zA-Z0-9(). -]*?)[.\s -][sS][0]*([0-9]+)[eE][0]*([0-9]+)";
+		private const string DefaultShowRegex = @"([0-9A-Za-z\s.-]+)[\s.-_]+[sS]0?([0-9]+)[\s.]?[eE]0?([0-9]+)";
+		private const string DefaultShowRegexFallBack = @"([a-zA-Z0-9(). -]*?)[.\s -][sS][0]*?([0-9]+)[eE][0]*?([0-9]+)";
 		private const string DefaultShowWithXRegex = @"([A-Za-z0-9\s.\-]*?)([0-9]+)x([0-9]+)";
 		private const string DefaultShowWithZeroDelimeter = @"([a-zA-Z0-9(). -]*?)[.\-\s]0?([0-9]+)0([0-9]+)";
 
@@ -35,13 +35,14 @@ namespace BlueScreenCategoriser {
 		//into DefaultNameStructure
 		//anything that requires more complicated structures should be handled by a different fn
 		//which should be included in this list
+
 		private static List<Func<string, EpisodeInfo>> _usableFunctions = new List<Func<string, EpisodeInfo>> {
 			DefaultNameStructure
 		};
 
 		private static readonly List<string> ShowRegexes = new List<string> {
-			DefaultShowWithXRegex,
 			DefaultShowRegex,
+			DefaultShowWithXRegex,
 			DefaultShowRegexFallBack,
 			HeavyDutyBulkMatcherWithDelimiter,
 			DefaultShowWithZeroDelimeter,

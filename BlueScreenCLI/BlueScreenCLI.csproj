@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Actions\Actions.csproj">
+      <Project>{12ac7e69-1c6e-4635-9b4b-a82e5325cf31}</Project>
+      <Name>Actions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueScreenCategorizer\BlueScreenCategorizer.csproj">
       <Project>{0ec22369-1cff-4dfb-8a76-2c300dd5a295}</Project>
       <Name>BlueScreenCategorizer</Name>
