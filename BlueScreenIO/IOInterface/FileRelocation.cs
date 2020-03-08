@@ -25,9 +25,13 @@ namespace BlueScreenIO.IOInterface
                 var newPath = $"{destination}\\{episodeInfo.toDirectory()}{extension}";
                 
                 var i = getInterface(type,path);
-                return i.Move(newPath);
+                Console.WriteLine($"moving {path} to {newPath}");
+                var mb = i.Move(newPath);
+                Console.WriteLine($"moved {path} to {newPath}");
+                return mb;
             }
             catch (Exception e) {
+                Console.WriteLine($"Error moving file");
                 return new m_Bool(false,e.Message);
             }
         }

@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
 using BlueScreenCategoriser;
 using BlueScreenIO;
 using BlueScreenIO.IOInterface;
-using BlueScreenIO.Storage;
+using Utils;
 
 namespace Actions {
-	public class Library {
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
+    public class Library {
 		private string fileName;
 
 		public bool IndexSource(string source) {
@@ -19,7 +22,7 @@ namespace Actions {
 			return true;
 		}
 
-		private bool indexFromLocation(string location) {
+		bool IndexFromLocation(string location) {
 			return false;
 		}
 
@@ -27,10 +30,9 @@ namespace Actions {
 			var n = 0;
 
 			var allFiles = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
-
 			foreach (var f in allFiles) {
 				var episodeInfo = FileCategorizer.GetFileInfo(f);
-
+				Console.WriteLine(f);
 				if (!episodeInfo)
 					continue;
 
@@ -43,7 +45,31 @@ namespace Actions {
 			return n;
 		}
 
-		public static List<string> BuildFromSourceWithOutput(string source, string destination) {
+        public static async Task<int> BuildFromSourceAsync(string source, string destination, StorageType storagetype)
+        {
+            var allFiles = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
+            List<Task<m_Bool>> tasks = new List<Task<m_Bool>>();
+            foreach (string file in allFiles)
+            {
+                var episodeInfo = FileCategorizer.GetFileInfo(file);
+                if (!episodeInfo)
+                    continue;
+                tasks.Add(Task.Run(()=>FileRelocation.RelocateFile(episodeInfo,destination,storagetype)));
+            }
+
+            var results = await Task.WhenAll(tasks);
+            int c = 0;
+            foreach (var result in results)
+            {
+                if (result)
+                    c++;
+            }
+
+
+            return c;
+        }
+
+        public static List<string> BuildFromSourceWithOutput(string source, string destination) {
 			var list = new List<string>();
 			var allFiles = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
